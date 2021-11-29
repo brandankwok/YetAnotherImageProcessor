@@ -13,13 +13,20 @@ pygame.init()
 # list of system options
 # ***TO-DO: populate it to provide more functionalities***
 system = [
-            "Q: Quit"
+            "Q: Quit",
+            "O: Open File"
          ]
 
 # list of basic operation options
 # ***TO-DO: populate it to provide more functionalities***
 basic = [
-          "1: Switch to Advanced Functions",
+          "1: Apply Red Filter",
+          "2: Apply Green Filter",
+          "3: Apply Blue Filter",
+          "4: Apply Sepia Filter",
+          "5: Apply Warm Filter",
+          "6: Apply Cold Filter",
+          "7: Switch to Advanced Functions"
          ]
 
 # list of advanced operation options
@@ -72,6 +79,11 @@ def handleUserInput(state, img):
         if userInput == "Q": # this case actually won't happen, it's here as an example
             print("Log: Quitting...")
         # ***TO-DO: add the rest to handle other system functionalities***
+        elif userInput.upper() == "O":
+            tkinter.Tk().withdraw()
+            openFilename = tkinter.filedialog.askopenfilename()
+            img = cmpt120imageProjHelper.getImage(openFilename)
+            cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(appStateValues))
 
     # or handle the manipulation functionalities based on which mode the application is in
     elif userInput.isdigit(): # has to be a digit for manipulation options
