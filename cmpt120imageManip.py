@@ -49,12 +49,12 @@ def applySepia(pixels):
       SepiaRed = (Red * .393) + (Green *.769) + (Blue * .189)
       SepiaGreen = (Red * .349) + (Green *.686) + (Blue * .168)
       SepiaBlue = (Red * .272) + (Green *.534) + (Blue * .131)
-      # if SepiaRed > 255:
-      #   SepiaRed = 255
-      # elif SepiaGreen > 255:
-      #   SepiaGreen = 255
-      # elif SepiaBlue > 255:
-      #   SepiaBlue = 255
+      if SepiaRed > 255:
+         SepiaRed = 255
+      if SepiaGreen > 255:
+         SepiaGreen = 255
+      if SepiaBlue > 255:
+         SepiaBlue = 255
       pixel[0] = int(SepiaRed)
       pixel[1] = int(SepiaGreen)
       pixel[2] = int(SepiaBlue)
