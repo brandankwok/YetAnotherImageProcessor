@@ -120,7 +120,6 @@ def rotateLeft(pixels):
     row = row[::-1]
     for j in range(len(row)):
         newPixels[j][i] = row[j]
-
   return newPixels
 
 def rotateRight(pixels):
@@ -130,5 +129,15 @@ def rotateRight(pixels):
     row = pixels[i]
     for j in range(len(row)):
       newPixels[j][len(pixels)-i-1] = row[j]
-
   return newPixels
+
+def sizeDouble(pixels):
+  height = len(pixels) * 2
+  width = len(pixels[0]) * 2
+  newpixels = cmpt120imageProjHelper.getBlackImage(width, height)
+  for row in range(height - 1, -1, 2):
+    for col in range(width - 1, -1, 2):
+      newrow = pixels[row]
+      newcol = pixels[col]
+      newpixels = pixels[newrow][newcol]
+  return newpixels
