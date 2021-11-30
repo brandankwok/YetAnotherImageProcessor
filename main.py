@@ -14,7 +14,9 @@ pygame.init()
 # ***TO-DO: populate it to provide more functionalities***
 system = [
             "Q: Quit",
-            "O: Open File"
+            "O: Open File",
+            "S: Save Current Image",
+            "R: Reload Original Image"
          ]
 
 # list of basic operation options
@@ -84,6 +86,16 @@ def handleUserInput(state, img):
             openFilename = tkinter.filedialog.askopenfilename()
             img = cmpt120imageProjHelper.getImage(openFilename)
             cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(appStateValues))
+            appStateValues["lastOpenFilename"] = openFilename
+        elif userInput.upper() == "S":
+            tkinter.Tk().withdraw()
+            saveFilename = tkinter.filedialog.asksaveasfilename()
+            cmpt120imageProjHelper.saveImage(img, saveFilename)
+            cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(appStateValues))
+            appStateValues["lastSaveFilename"] = saveFilename
+        elif userInput.upper() == "R":
+            img = cmpt120imageProjHelper.getImage(appStateValues["lastOpenFilename"])
+            cmpt120imageProjHelper.showInterface(img, appStateValues["lastOpenFilename"], generateMenu(appStateValues))
 
     # or handle the manipulation functionalities based on which mode the application is in
     elif userInput.isdigit(): # has to be a digit for manipulation options
