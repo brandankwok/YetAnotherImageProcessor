@@ -55,7 +55,7 @@ def generateMenu(state):
         menuString.append("--Basic Mode--")
         menuString += basic
         menuString.append("")
-        menuString.append("***TO-DO: Update this line to show the proper information***")
+        menuString.append("Enter your choice (Q/O/S/R or 1-7)...")
     elif state["mode"] == "advanced":
         menuString.append("--Advanced Mode--")
         menuString += advanced
