@@ -144,7 +144,17 @@ def handleUserInput(state, img):
             if userInput == "7":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 state["mode"] = "advanced"
-                cmpt120imageProjHelper.showInterface(img, "test", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Switch to Advanced Options", generateMenu(state))
+        #Advanced options...
+        elif state["mode"] == "advanced":
+
+
+
+            if userInput =="6":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                state["mode"] = "basic"
+                cmpt120imageProjHelper.showInterface(img, "Switch to Basic Options", generateMenu(state))
+
     else: # unrecognized user input
         print("Log: Unrecognized user input: " + userInput)
     return img
