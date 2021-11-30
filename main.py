@@ -148,9 +148,17 @@ def handleUserInput(state, img):
         #Advanced options...
         elif state["mode"] == "advanced":
 
+            if userInput == "1":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                img = cmpt120imageManip.rotateLeft(img)
+                cmpt120imageProjHelper.showInterface(img, advanced[int(userInput) - 1], generateMenu(state))
 
+            if userInput == "2":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                img = cmpt120imageManip.rotateRight(img)
+                cmpt120imageProjHelper.showInterface(img, advanced[int(userInput) - 1], generateMenu(state))
 
-            if userInput =="6":
+            if userInput == "6":
                 print("Log: Performing " + advanced[int(userInput) - 1])
                 state["mode"] = "basic"
                 cmpt120imageProjHelper.showInterface(img, "Switch to Basic Options", generateMenu(state))

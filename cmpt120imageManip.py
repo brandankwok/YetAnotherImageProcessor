@@ -111,3 +111,24 @@ def applyCold(pixels):
       pixel[0] = ScaleDownRed
       pixel[2] = ScaleUpBlue
   return pixels
+
+def rotateLeft(pixels):
+  newPixels = cmpt120imageProjHelper.getBlackImage(len(pixels), len(pixels[0]))
+
+  for i in range(len(pixels)):
+    row = pixels[i]
+    row = row[::-1]
+    for j in range(len(row)):
+        newPixels[j][i] = row[j]
+
+  return newPixels
+
+def rotateRight(pixels):
+  newPixels = cmpt120imageProjHelper.getBlackImage(len(pixels), len(pixels[0]))
+
+  for i in range(len(pixels)):
+    row = pixels[i]
+    for j in range(len(row)):
+      newPixels[j][len(pixels)-i-1] = row[j]
+
+  return newPixels
