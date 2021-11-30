@@ -34,7 +34,12 @@ basic = [
 # list of advanced operation options
 # ***TO-DO: populate it to provide more functionalities***
 advanced = [
-                "1: Switch to Basic Functions",
+                "1: Rotate Left",
+                "2: Rotate Right",
+                "3: Double Size",
+                "4: Half Size",
+                "5: Locate Fish",
+                "6: Switch to Basic Functions"
              ]
 
 # a helper function that generates a list of strings to be displayed in the interface
@@ -60,7 +65,7 @@ def generateMenu(state):
         menuString.append("--Advanced Mode--")
         menuString += advanced
         menuString.append("")
-        menuString.append("***TO-DO: Update this line to show the proper information***")
+        menuString.append("Enter your choice (Q/O/S/R or 1-6)...")
     else:
         menuString.append("Error: Unknown mode!")
 
@@ -134,8 +139,12 @@ def handleUserInput(state, img):
             if userInput == "6":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyCold(img)
-                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))\
+                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
 
+            if userInput == "7":
+                print("Log: Performing " + basic[int(userInput) - 1])
+                state["mode"] = "advanced"
+                cmpt120imageProjHelper.showInterface(img, "test", generateMenu(state))
     else: # unrecognized user input
         print("Log: Unrecognized user input: " + userInput)
     return img
