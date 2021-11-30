@@ -92,13 +92,37 @@ def handleUserInput(state, img):
         if state["mode"] == "basic":
             if userInput == "1":
                 print("Log: Performing " + basic[int(userInput)-1])
-                state["mode"] = "advanced"
 
                 # ***TO-DO: use this format when you add the manipulation functionalities***
                 # ***instead of setting the value of state["mode"]***
                 # ***it is ok to go a bit beyond 100 characters when calling the showUserInterface***
-                #img = cmpt120imageManip.applyRedFilter(img)
-                #cmpt120imageProjHelper.showUserInterface(img, "Apply Red Filter ", generateMenu(state))
+                img = cmpt120imageManip.applyRed(img)
+                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+
+            if userInput == "2":
+                print("Log: Performing " + basic[int(userInput) - 1])
+                img = cmpt120imageManip.applyGreen(img)
+                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+
+            if userInput == "3":
+                print("Log: Performing " + basic[int(userInput) - 1])
+                img = cmpt120imageManip.applyBlue(img)
+                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+
+            if userInput == "4":
+                print("Log: Performing " + basic[int(userInput) - 1])
+                img = cmpt120imageManip.applySepia(img)
+                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+
+            if userInput == "5":
+                print("Log: Performing " + basic[int(userInput) - 1])
+                img = cmpt120imageManip.applyWarm(img)
+                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+
+            if userInput == "6":
+                print("Log: Performing " + basic[int(userInput) - 1])
+                img = cmpt120imageManip.applyCold(img)
+                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))\
 
     else: # unrecognized user input
         print("Log: Unrecognized user input: " + userInput)
