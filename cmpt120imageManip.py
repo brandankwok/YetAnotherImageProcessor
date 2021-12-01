@@ -155,27 +155,17 @@ def locateFish(pixels):
         for j in range(len(pixels[0])):
             pixel = pixels[i][j]
             if isYellow(pixel):
-
                 if top > i:
                     top = i
-
                 if  bottom < i:
                     bottom = i
-
                 if left > j:
                     left = j
-
                 if right < j:
                     right = j
 
-
-                print(str(i) + " " + str(j))
-                #pixels[i][j] = [0, 255, 0]
-
-    print(str(top) + " " + str(bottom) + " " + str(left) + " " + str(right))
     pixels = drawBox(pixels, top, bottom, left, right)
     return pixels
-
 
 def isYellow(pixel):
 
@@ -189,7 +179,6 @@ def isYellow(pixel):
 
     if ( (h>=45 and h<=65) and (s>=45 and s<=100) and (v>=60 and v<=100)):
         return True
-
     return False
 
 def drawBox(pixels, top, bottom, left, right):
