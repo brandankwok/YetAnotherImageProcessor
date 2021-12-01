@@ -3,7 +3,7 @@
 # Authors: Brandan Kwok 301462230, Kyle Deliyannides 301459316
 # Section: D300
 # Date: December 6th, 2021
-# Description: 
+# Description:
 
 import cmpt120imageProjHelper
 import cmpt120imageManip
@@ -12,7 +12,6 @@ import pygame
 pygame.init()
 
 # list of system options
-# ***TO-DO: populate it to provide more functionalities***
 system = [
             "Q: Quit",
             "O: Open File",
@@ -21,7 +20,6 @@ system = [
          ]
 
 # list of basic operation options
-# ***TO-DO: populate it to provide more functionalities***
 basic = [
           "1: Apply Red Filter",
           "2: Apply Green Filter",
@@ -33,7 +31,6 @@ basic = [
          ]
 
 # list of advanced operation options
-# ***TO-DO: populate it to provide more functionalities***
 advanced = [
                 "1: Rotate Left",
                 "2: Rotate Right",
@@ -86,7 +83,7 @@ def handleUserInput(state, img):
         print("Log: Doing system functionalities " + userInput)
         if userInput == "Q": # this case actually won't happen, it's here as an example
             print("Log: Quitting...")
-        # ***TO-DO: add the rest to handle other system functionalities***
+
         elif userInput == "O":
             tkinter.Tk().withdraw()
             openFilename = tkinter.filedialog.askopenfilename()
@@ -106,14 +103,11 @@ def handleUserInput(state, img):
     # or handle the manipulation functionalities based on which mode the application is in
     elif userInput.isdigit(): # has to be a digit for manipulation options
         print("Log: Doing manipulation functionalities " + userInput)
-        # ***TO-DO: add the rest to handle other manipulation functionalities***
+
+        #Basic options
         if state["mode"] == "basic":
             if userInput == "1":
                 print("Log: Performing " + basic[int(userInput)-1])
-
-                # ***TO-DO: use this format when you add the manipulation functionalities***
-                # ***instead of setting the value of state["mode"]***
-                # ***it is ok to go a bit beyond 100 characters when calling the showUserInterface***
                 img = cmpt120imageManip.applyRed(img)
                 cmpt120imageProjHelper.showInterface(img, "Apply Red Filter ", generateMenu(state))
 
@@ -146,7 +140,8 @@ def handleUserInput(state, img):
                 print("Log: Performing " + basic[int(userInput) - 1])
                 state["mode"] = "advanced"
                 cmpt120imageProjHelper.showInterface(img, "Advanced Options ", generateMenu(state))
-        #Advanced options...
+
+        #Advanced options
         elif state["mode"] == "advanced":
 
             if userInput == "1":

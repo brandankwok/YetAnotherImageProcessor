@@ -115,21 +115,34 @@ def applyCold(pixels):
 
 
 def rotateLeft(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns altered pixels - rotated 90 degrees left
+    """
+    # Creates new image with width and height flipped from original image
     newPixels = cmpt120imageProjHelper.getBlackImage(len(pixels), len(pixels[0]))
 
     for i in range(len(pixels)):
+        # Iterates through each row of original image temporarily storing each row as variable 'row'
         row = pixels[i]
         for j in range(len(row)):
+            # Iterates through each pixel of 'row' storing it in new image starting from bottom left corner
             newPixels[len(pixels[0]) - j - 1][i] = row[j]
     return newPixels
 
-
 def rotateRight(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns altered pixels - rotated 90 degrees right
+    """
+    # Creates new image with width and height flipped from original image
     newPixels = cmpt120imageProjHelper.getBlackImage(len(pixels), len(pixels[0]))
 
     for i in range(len(pixels)):
+        # Iterates through each row of original image temporarily storing each row as variable 'row'
         row = pixels[i]
         for j in range(len(row)):
+            # Iterates through each pixel of 'row' storing it in new image starting from top right corner
             newPixels[j][len(pixels) - i - 1] = row[j]
     return newPixels
 
@@ -147,7 +160,6 @@ def sizeDouble(pixels):
         for j in range(2):
           newpixels[2*r+i][2*c+j] = origpixel
   return newpixels
-
 
 def locateFish(pixels):
     top = len(pixels)
