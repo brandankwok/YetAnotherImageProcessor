@@ -46,15 +46,9 @@ def applySepia(pixels):
       Red = pixel[0]
       Green = pixel[1]
       Blue = pixel[2]
-      SepiaRed = (Red * .393) + (Green *.769) + (Blue * .189)
-      SepiaGreen = (Red * .349) + (Green *.686) + (Blue * .168)
-      SepiaBlue = (Red * .272) + (Green *.534) + (Blue * .131)
-      if SepiaRed > 255:
-         SepiaRed = 255
-      if SepiaGreen > 255:
-         SepiaGreen = 255
-      if SepiaBlue > 255:
-         SepiaBlue = 255
+      SepiaRed = min(((Red * .393) + (Green *.769) + (Blue * .189)), 255)
+      SepiaGreen = min(((Red * .349) + (Green *.686) + (Blue * .168)), 255)
+      SepiaBlue = min(((Red * .272) + (Green *.534) + (Blue * .131)), 255)
       pixel[0] = int(SepiaRed)
       pixel[1] = int(SepiaGreen)
       pixel[2] = int(SepiaBlue)
@@ -140,3 +134,5 @@ def sizeDouble(pixels):
       newcol = pixels[col]
       newpixels = pixels[newrow][newcol]
   return newpixels
+
+
