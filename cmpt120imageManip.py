@@ -117,9 +117,8 @@ def rotateLeft(pixels):
 
   for i in range(len(pixels)):
     row = pixels[i]
-    row = row[::-1]
     for j in range(len(row)):
-        newPixels[j][i] = row[j]
+        newPixels[len(pixels[0])-j-1][i] = row[j]
   return newPixels
 
 def rotateRight(pixels):
