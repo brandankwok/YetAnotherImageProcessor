@@ -132,17 +132,20 @@ def rotateRight(pixels):
             newPixels[j][len(pixels) - i - 1] = row[j]
     return newPixels
 
-
 def sizeDouble(pixels):
-    height = len(pixels) * 2
-    width = len(pixels[0]) * 2
-    newpixels = cmpt120imageProjHelper.getBlackImage(width, height)
-    for row in range(height - 1, -1, 2):
-        for col in range(width - 1, -1, 2):
-            newrow = pixels[row]
-            newcol = pixels[col]
-            newpixels = pixels[newrow][newcol]
-    return newpixels
+  origheight = len(pixels)
+  origwidth = len(pixels[0])
+  height = len(pixels)*2
+  width = len(pixels[0])*2
+  newpixels = cmpt120imageProjHelper.getBlackImage(width, height)
+
+  for r in range(origheight):
+    for c in range(origwidth):
+      origpixel = pixels[r][c]
+      for i in range(2):
+        for j in range(2):
+          newpixels[2*r+i][2*c+j] = origpixel
+  return newpixels
 
 
 def locateFish(pixels):

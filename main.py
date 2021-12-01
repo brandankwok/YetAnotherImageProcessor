@@ -163,6 +163,11 @@ def handleUserInput(state, img):
                 img = cmpt120imageManip.sizeDouble(img)
                 cmpt120imageProjHelper.showInterface(img, "Double Size ", generateMenu(state))
 
+            if userInput == "4":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                img = cmpt120imageManip.sizeDouble(img)
+                cmpt120imageProjHelper.showInterface(img, "Half Size ", generateMenu(state))
+
             if userInput == "5":
                 print("Log: Performing " + advanced[int(userInput) - 1])
                 img = cmpt120imageManip.locateFish(img)
