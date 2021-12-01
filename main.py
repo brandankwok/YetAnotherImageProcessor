@@ -34,7 +34,12 @@ basic = [
 # list of advanced operation options
 # ***TO-DO: populate it to provide more functionalities***
 advanced = [
-                "1: Switch to Basic Functions",
+                "1: Rotate Left",
+                "2: Rotate Right",
+                "3: Double Size",
+                "4: Half Size",
+                "5: Locate Fish",
+                "6: Switch to Basic Functions"
              ]
 
 # a helper function that generates a list of strings to be displayed in the interface
@@ -55,12 +60,12 @@ def generateMenu(state):
         menuString.append("--Basic Mode--")
         menuString += basic
         menuString.append("")
-        menuString.append("***TO-DO: Update this line to show the proper information***")
+        menuString.append("Enter your choice (Q/O/S/R or 1-7)...")
     elif state["mode"] == "advanced":
         menuString.append("--Advanced Mode--")
         menuString += advanced
         menuString.append("")
-        menuString.append("***TO-DO: Update this line to show the proper information***")
+        menuString.append("Enter your choice (Q/O/S/R or 1-6)...")
     else:
         menuString.append("Error: Unknown mode!")
 
@@ -109,32 +114,69 @@ def handleUserInput(state, img):
                 # ***instead of setting the value of state["mode"]***
                 # ***it is ok to go a bit beyond 100 characters when calling the showUserInterface***
                 img = cmpt120imageManip.applyRed(img)
-                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Red Filter ", generateMenu(state))
 
             if userInput == "2":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyGreen(img)
-                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Green Filter ", generateMenu(state))
 
             if userInput == "3":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyBlue(img)
-                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Blue Filter ", generateMenu(state))
 
             if userInput == "4":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applySepia(img)
-                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Sepia Filter ", generateMenu(state))
 
             if userInput == "5":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyWarm(img)
-                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Warm Filter ", generateMenu(state))
 
             if userInput == "6":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyCold(img)
-                cmpt120imageProjHelper.showInterface(img, basic[int(userInput) - 1], generateMenu(state))\
+                cmpt120imageProjHelper.showInterface(img, "Apply Cold Filter ", generateMenu(state))
+
+            if userInput == "7":
+                print("Log: Performing " + basic[int(userInput) - 1])
+                state["mode"] = "advanced"
+                cmpt120imageProjHelper.showInterface(img, "Advanced Options ", generateMenu(state))
+        #Advanced options...
+        elif state["mode"] == "advanced":
+
+            if userInput == "1":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                img = cmpt120imageManip.rotateLeft(img)
+                cmpt120imageProjHelper.showInterface(img, "Rotate Left ", generateMenu(state))
+
+            if userInput == "2":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                img = cmpt120imageManip.rotateRight(img)
+                cmpt120imageProjHelper.showInterface(img, "Rotate Right ", generateMenu(state))
+
+            if userInput == "3":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                img = cmpt120imageManip.sizeDouble(img)
+                cmpt120imageProjHelper.showInterface(img, "Double Size ", generateMenu(state))
+
+            if userInput == "4":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                img = cmpt120imageManip.sizeDouble(img)
+                cmpt120imageProjHelper.showInterface(img, "Half Size ", generateMenu(state))
+
+            if userInput == "5":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                img = cmpt120imageManip.locateFish(img)
+                cmpt120imageProjHelper.showInterface(img, "Locate Fish ", generateMenu(state))
+
+            if userInput == "6":
+                print("Log: Performing " + advanced[int(userInput) - 1])
+                state["mode"] = "basic"
+                cmpt120imageProjHelper.showInterface(img, "Basic Options ", generateMenu(state))
 
     else: # unrecognized user input
         print("Log: Unrecognized user input: " + userInput)
