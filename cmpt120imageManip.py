@@ -185,7 +185,6 @@ def drawBox(pixels, top, bottom, left, right):
 
     horizontalLength = abs(left-right)
     verticalLength = abs(top-bottom)
-    print(str(horizontalLength) + " " + str(verticalLength))
 
     for i in range(left, left+horizontalLength):
         pixels[top][i] = [0, 255, 0]
