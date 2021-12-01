@@ -86,19 +86,19 @@ def handleUserInput(state, img):
         if userInput == "Q": # this case actually won't happen, it's here as an example
             print("Log: Quitting...")
         # ***TO-DO: add the rest to handle other system functionalities***
-        elif userInput.upper() == "O":
+        elif userInput == "O":
             tkinter.Tk().withdraw()
             openFilename = tkinter.filedialog.askopenfilename()
             img = cmpt120imageProjHelper.getImage(openFilename)
             cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(appStateValues))
-            appStateValues["lastOpenFilename"] = openFilename
-        elif userInput.upper() == "S":
+            state["lastOpenFilename"] = openFilename
+        elif userInput == "S":
             tkinter.Tk().withdraw()
             saveFilename = tkinter.filedialog.asksaveasfilename()
             cmpt120imageProjHelper.saveImage(img, saveFilename)
             cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(appStateValues))
-            appStateValues["lastSaveFilename"] = saveFilename
-        elif userInput.upper() == "R":
+            state["lastSaveFilename"] = saveFilename
+        elif userInput == "R":
             img = cmpt120imageProjHelper.getImage(appStateValues["lastOpenFilename"])
             cmpt120imageProjHelper.showInterface(img, appStateValues["lastOpenFilename"], generateMenu(appStateValues))
 
