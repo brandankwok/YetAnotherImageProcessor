@@ -1,8 +1,9 @@
 # CMPT 120 Yet Another Image Processer
 # Starter code for main.py
-# Author(s): Brandan Kwok, Kyle Deliyannides
+# Authors: Brandan Kwok 301462230, Kyle Deliyannides 301459316
+# Section: D300
 # Date: December 6th, 2021
-# Description:
+# Description: 
 
 import cmpt120imageProjHelper
 import cmpt120imageManip
@@ -86,19 +87,19 @@ def handleUserInput(state, img):
         if userInput == "Q": # this case actually won't happen, it's here as an example
             print("Log: Quitting...")
         # ***TO-DO: add the rest to handle other system functionalities***
-        elif userInput.upper() == "O":
+        elif userInput == "O":
             tkinter.Tk().withdraw()
             openFilename = tkinter.filedialog.askopenfilename()
             img = cmpt120imageProjHelper.getImage(openFilename)
             cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(appStateValues))
-            appStateValues["lastOpenFilename"] = openFilename
-        elif userInput.upper() == "S":
+            state["lastOpenFilename"] = openFilename
+        elif userInput == "S":
             tkinter.Tk().withdraw()
             saveFilename = tkinter.filedialog.asksaveasfilename()
             cmpt120imageProjHelper.saveImage(img, saveFilename)
             cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(appStateValues))
-            appStateValues["lastSaveFilename"] = saveFilename
-        elif userInput.upper() == "R":
+            state["lastSaveFilename"] = saveFilename
+        elif userInput == "R":
             img = cmpt120imageProjHelper.getImage(appStateValues["lastOpenFilename"])
             cmpt120imageProjHelper.showInterface(img, appStateValues["lastOpenFilename"], generateMenu(appStateValues))
 

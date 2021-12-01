@@ -1,6 +1,7 @@
 # CMPT 120 Yet Another Image Processer
 # Starter code for cmpt120imageManip.py
-# Author(s): Brandan Kwok, Kyle Deliyannides
+# Authors: Brandan Kwok 301462230, Kyle Deliyannides 301459316
+# Section: D300
 # Date: December 6th, 2021
 # Description:
 
