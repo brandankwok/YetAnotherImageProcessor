@@ -191,7 +191,7 @@ def handleUserInput(state, img):
             # Half Size
             if userInput == "4":
                 print("Log: Performing " + advanced[int(userInput) - 1])
-                img = cmpt120imageManip.sizeDouble(img)
+                img = cmpt120imageManip.sizeHalf(img)
                 cmpt120imageProjHelper.showInterface(img, "Half Size ", generateMenu(state))
 
             # Locate Fish

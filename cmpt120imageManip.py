@@ -210,10 +210,42 @@ def sizeDouble(pixels):
     return newpixels
 
 def sizeHalf(pixels):
-    origheight = len(pixels)
-    origwidth = len(pixels[0])
-    halfheight = len(pixels)//2
-    halfwidth = len(pixels[0])//2
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns a new image with width equal to half the original width and height
+            Each pixel of the new image will be the average of four adjacent pixels
+    """
+    # Checks is image can be halved - this is done to prevent a potential crash
+    if len(pixels) > 2 or len(pixels[0]) > 2:
+        # Creates black image 'newPixels' which has half the height and width of 'pixels'
+        newPixels = cmpt120imageProjHelper.getBlackImage(len(pixels[0])//2, len(pixels)//2)
+        # Iterates through each pixel in 'newPixels'
+        for i in range(len(newPixels)):
+           for j in range(len(newPixels[0])):
+               # Assigns newPixel[i][j] to the average of the four adjacent pixels
+                newPixels[i][j] = average(pixels, i, j)
+        return newPixels
+    else:
+        print("Log: Error. Image too small to half the size.")
+        return pixels
+
+def average(pixels, i, j):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+            i - index of row (integer)
+            j - index of column (integer)
+    Output: Returns a list of RGB values for one pixel
+            This pixel is calculated from four adjacent pixels in 'pixels' based off the indexes i and j
+    """
+    # variables a, b, c, and d are one pixel each.
+    # each pixel is adjacent to one another, based off the indexes i and j
+    a = pixels[i*2][j*2]
+    b = pixels[i*2+1][j*2]
+    c = pixels[i*2][j*2+1]
+    d = pixels[i*2+1][j*2+1]
+    # calculates the average RGB values of all four adjacent pixels and stores it in a list 'pixel'
+    pixel = [(a[0]+b[0]+c[0]+d[0])//4, (a[1]+b[1]+c[1]+d[1])//4, (a[2]+b[2]+c[2]+d[2])//4]
+    return pixel
 
 def locateFish(pixels):
     """
