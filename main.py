@@ -88,7 +88,7 @@ def handleUserInput(state, img):
             # prevents a crash by checking to see if 'cancel' is pressed
             if openFilename != "":
                 img = cmpt120imageProjHelper.getImage(openFilename)
-                cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(appStateValues))
+                cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(state))
                 print("Log: Opening file: " + openFilename)
             else:
                 print("Log: No file selected")
@@ -101,7 +101,7 @@ def handleUserInput(state, img):
             # prevents a crash by checking to see if 'cancel' is pressed
             if saveFilename != "":
                 cmpt120imageProjHelper.saveImage(img, saveFilename)
-                cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(appStateValues))
+                cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(state))
                 print("Log: Saving file: " + saveFilename)
             else:
                 print("Log: No save location selected")
@@ -116,7 +116,7 @@ def handleUserInput(state, img):
             # This check is done to prevent a program crash
             else:
                 img = cmpt120imageProjHelper.getImage(state["lastOpenFilename"])
-                cmpt120imageProjHelper.showInterface(img, state["lastOpenFilename"], generateMenu(appStateValues))
+                cmpt120imageProjHelper.showInterface(img, state["lastOpenFilename"], generateMenu(state))
 
     # or handle the manipulation functionalities based on which mode the application is in
     elif userInput.isdigit(): # has to be a digit for manipulation options
