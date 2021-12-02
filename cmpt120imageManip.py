@@ -1,9 +1,8 @@
 # CMPT 120 Yet Another Image Processer
-# Starter code for cmpt120imageManip.py
 # Authors: Brandan Kwok 301462230, Kyle Deliyannides 301459316
 # Section: D300
 # Date: December 6th, 2021
-# Description:
+# Description: Module which contains all manipulation options for the image processor.
 
 import cmpt120imageProjHelper
 import numpy
