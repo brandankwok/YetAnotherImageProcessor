@@ -10,62 +10,95 @@ import numpy
 
 
 def applyRed(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns only the red values and sets Green and Blue values to zero in each pixel of the image
+    """
+    # Set the height and width for the image
     height = len(pixels)
     width = len(pixels[0])
+    # Iterate through each pixel in the rows and columns
     for row in range(height):
         for col in range(width):
             pixel = pixels[row][col]
+            # Set the Green and Blue values to zero
             pixel[1] = 0
             pixel[2] = 0
     return pixels
-
 
 def applyGreen(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns only the Green values and sets Red and Blue values to zero in each pixel of the image
+    """
+    # Set the height and width for the image
     height = len(pixels)
     width = len(pixels[0])
+    # Iterate through each pixel in the rows and columns
     for row in range(height):
         for col in range(width):
             pixel = pixels[row][col]
+            # Set the Red and Blue values to zero
             pixel[0] = 0
             pixel[2] = 0
     return pixels
 
-
 def applyBlue(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns only the Blue values and sets Red and Blue values to zero in each pixel of the image
+    """
+    # Set the height and width for the image
     height = len(pixels)
     width = len(pixels[0])
+    # Iterate through each pixel in the rows and columns
     for row in range(height):
         for col in range(width):
             pixel = pixels[row][col]
+            # Set the Red and Green values to zero
             pixel[0] = 0
             pixel[1] = 0
     return pixels
 
-
 def applySepia(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns a warm brownish tone by calculating a weighted average of the original R/G/B values for each pixel
+    """
+    # Set the height and width for the image
     height = len(pixels)
     width = len(pixels[0])
+    # Iterate through each pixel in the rows and columns
     for row in range(height):
         for col in range(width):
             pixel = pixels[row][col]
+            # Assign the RGB values
             Red = pixel[0]
             Green = pixel[1]
             Blue = pixel[2]
+            # Use the Sepia formula to calculate new RGB values using the min function
             SepiaRed = min(((Red * .393) + (Green * .769) + (Blue * .189)), 255)
             SepiaGreen = min(((Red * .349) + (Green * .686) + (Blue * .168)), 255)
             SepiaBlue = min(((Red * .272) + (Green * .534) + (Blue * .131)), 255)
+            # Assign the new RBG values to the original RGB values
             pixel[0] = int(SepiaRed)
             pixel[1] = int(SepiaGreen)
             pixel[2] = int(SepiaBlue)
     return pixels
 
-
 def applyWarm(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns a warm tone by scaling the original Red value up and the Blue value down using formulas
+    """
+    # Set the height and width for the image
     height = len(pixels)
     width = len(pixels[0])
+    # Iterate through each pixel in the rows and columns
     for row in range(height):
         for col in range(width):
             pixel = pixels[row][col]
+            # Assign the Red and Blue values
             Red = pixel[0]
             Blue = pixel[2]
             # Scale Red value up
@@ -82,17 +115,24 @@ def applyWarm(pixels):
                 ScaleDownBlue = (Blue - 64) / (128 - 64) * (100 - 50) + 50
             else:
                 ScaleDownBlue = (Blue - 128) / (255 - 128) * (255 - 100) + 100
+            # Assign the new Red and Blue values to the original Red and Blue values
             pixel[0] = ScaleUpRed
             pixel[2] = ScaleDownBlue
     return pixels
 
-
 def applyCold(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns a cold tone by scaling the original Red value down and the Blue value up using formulas
+    """
+    # Set the height and width for the image
     height = len(pixels)
     width = len(pixels[0])
+    # Iterate through each pixel in the rows and columns
     for row in range(height):
         for col in range(width):
             pixel = pixels[row][col]
+            # Assign the Red and Blue values
             Red = pixel[0]
             Blue = pixel[2]
             # Scale Red value down
@@ -109,10 +149,10 @@ def applyCold(pixels):
                 ScaleUpBlue = (Blue - 64) / (128 - 64) * (160 - 80) + 80
             else:
                 ScaleUpBlue = (Blue - 128) / (255 - 128) * (255 - 160) + 160
+            # Assign the new Red and Blue values to the original Red and Blue values
             pixel[0] = ScaleDownRed
             pixel[2] = ScaleUpBlue
     return pixels
-
 
 def rotateLeft(pixels):
     """
@@ -147,19 +187,34 @@ def rotateRight(pixels):
     return newPixels
 
 def sizeDouble(pixels):
-  origheight = len(pixels)
-  origwidth = len(pixels[0])
-  height = len(pixels)*2
-  width = len(pixels[0])*2
-  newpixels = cmpt120imageProjHelper.getBlackImage(width, height)
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns a new image with width equal to 2*the original’s width and height equal to 2* the original’s height
+    """
+    # Set the original height and width for the image
+    origheight = len(pixels)
+    origwidth = len(pixels[0])
+    # Set the new height and width for the new image
+    doubleheight = len(pixels)*2
+    doublewidth = len(pixels[0])*2
+    # Creates new image with width and height doubled from original image
+    newpixels = cmpt120imageProjHelper.getBlackImage(doublewidth, doubleheight)
+    # Iterate through each pixel in the original rows and columns
+    for r in range(origheight):
+        for c in range(origwidth):
+          origpixel = pixels[r][c]
+          # Within the original image iterate through 2x2 pixels
+          for i in range(2):
+            for j in range(2):
+                # Set each calculated 2x2 original pixel to one pixel in the new image
+                newpixels[2*r+i][2*c+j] = origpixel
+    return newpixels
 
-  for r in range(origheight):
-    for c in range(origwidth):
-      origpixel = pixels[r][c]
-      for i in range(2):
-        for j in range(2):
-          newpixels[2*r+i][2*c+j] = origpixel
-  return newpixels
+def sizeHalf(pixels):
+    origheight = len(pixels)
+    origwidth = len(pixels[0])
+    halfheight = len(pixels)//2
+    halfwidth = len(pixels[0])//2
 
 def locateFish(pixels):
     """
