@@ -88,7 +88,7 @@ def handleUserInput(state, img):
             # prevents a crash by checking to see if 'cancel' is pressed
             if openFilename != "":
                 img = cmpt120imageProjHelper.getImage(openFilename)
-                cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Open Image - " + openFilename, generateMenu(state))
                 print("Log: Opening file: " + openFilename)
                 state["lastOpenFilename"] = openFilename
             else:
@@ -102,7 +102,7 @@ def handleUserInput(state, img):
             # prevents a crash by checking to see if 'cancel' is pressed
             if saveFilename != "":
                 cmpt120imageProjHelper.saveImage(img, saveFilename)
-                cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Save Image - " + saveFilename, generateMenu(state))
                 print("Log: Saving file: " + saveFilename)
                 state["lastSaveFilename"] = saveFilename
             else:
@@ -114,11 +114,12 @@ def handleUserInput(state, img):
             # Checks to see if any image has been loaded before, if none has it will reset image to black
             if state["lastOpenFilename"] == "":
                 img = cmpt120imageProjHelper.getBlackImage(300, 200)
+                cmpt120imageProjHelper.showInterface(img, "No Image", generateMenu(state))
             # If an image has been loaded before, resets image to lastOpenFilename taken from dictionary
             # This check is done to prevent a program crash
             else:
                 img = cmpt120imageProjHelper.getImage(state["lastOpenFilename"])
-                cmpt120imageProjHelper.showInterface(img, state["lastOpenFilename"], generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Reload Image - " + state["lastOpenFilename"], generateMenu(state))
 
     # or handle the manipulation functionalities based on which mode the application is in
     elif userInput.isdigit(): # has to be a digit for manipulation options
@@ -131,43 +132,43 @@ def handleUserInput(state, img):
             if userInput == "1":
                 print("Log: Performing " + basic[int(userInput)-1])
                 img = cmpt120imageManip.applyRed(img)
-                cmpt120imageProjHelper.showInterface(img, "Apply Red Filter ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Red Filter", generateMenu(state))
 
             # Apply Green Filter
             if userInput == "2":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyGreen(img)
-                cmpt120imageProjHelper.showInterface(img, "Apply Green Filter ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Green Filter", generateMenu(state))
 
             # Apply Blue Filter
             if userInput == "3":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyBlue(img)
-                cmpt120imageProjHelper.showInterface(img, "Apply Blue Filter ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Blue Filter", generateMenu(state))
 
             # Apply Sepia Filter
             if userInput == "4":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applySepia(img)
-                cmpt120imageProjHelper.showInterface(img, "Apply Sepia Filter ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Sepia Filter", generateMenu(state))
 
             # Apply Warm Filter
             if userInput == "5":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyWarm(img)
-                cmpt120imageProjHelper.showInterface(img, "Apply Warm Filter ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Warm Filter", generateMenu(state))
 
             # Apply Cold Filter
             if userInput == "6":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 img = cmpt120imageManip.applyCold(img)
-                cmpt120imageProjHelper.showInterface(img, "Apply Cold Filter ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Apply Cold Filter", generateMenu(state))
 
             # Switch to Advanced Options
             if userInput == "7":
                 print("Log: Performing " + basic[int(userInput) - 1])
                 state["mode"] = "advanced"
-                cmpt120imageProjHelper.showInterface(img, "Advanced Options ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Advanced Options", generateMenu(state))
 
         #Advanced options
         elif state["mode"] == "advanced":
@@ -176,37 +177,37 @@ def handleUserInput(state, img):
             if userInput == "1":
                 print("Log: Performing " + advanced[int(userInput) - 1])
                 img = cmpt120imageManip.rotateLeft(img)
-                cmpt120imageProjHelper.showInterface(img, "Rotate Left ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Rotate Left", generateMenu(state))
 
             # Rotate Right
             if userInput == "2":
                 print("Log: Performing " + advanced[int(userInput) - 1])
                 img = cmpt120imageManip.rotateRight(img)
-                cmpt120imageProjHelper.showInterface(img, "Rotate Right ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Rotate Right", generateMenu(state))
 
             # Double Size
             if userInput == "3":
                 print("Log: Performing " + advanced[int(userInput) - 1])
                 img = cmpt120imageManip.sizeDouble(img)
-                cmpt120imageProjHelper.showInterface(img, "Double Size ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Double Size", generateMenu(state))
 
             # Half Size
             if userInput == "4":
                 print("Log: Performing " + advanced[int(userInput) - 1])
                 img = cmpt120imageManip.sizeHalf(img)
-                cmpt120imageProjHelper.showInterface(img, "Half Size ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Half Size", generateMenu(state))
 
             # Locate Fish
             if userInput == "5":
                 print("Log: Performing " + advanced[int(userInput) - 1])
                 img = cmpt120imageManip.locateFish(img)
-                cmpt120imageProjHelper.showInterface(img, "Locate Fish ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Locate Fish", generateMenu(state))
 
             # Switch to Basic Options
             if userInput == "6":
                 print("Log: Performing " + advanced[int(userInput) - 1])
                 state["mode"] = "basic"
-                cmpt120imageProjHelper.showInterface(img, "Basic Options ", generateMenu(state))
+                cmpt120imageProjHelper.showInterface(img, "Basic Options", generateMenu(state))
 
     else: # unrecognized user input
         print("Log: Unrecognized user input: " + userInput)
