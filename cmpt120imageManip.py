@@ -172,9 +172,9 @@ def locateFish(pixels):
     this essentially assumes that the top of the fish is the very bottom of the image,
     the bottom of the fish is the very top of the image, left is the very right, and right is the very left.
     """
-    top = len(pixels)
+    top = len(pixels)-1
     bottom = 0
-    left = len(pixels[0])
+    left = len(pixels[0])-1
     right = 0
 
     # Iterates through every pixel in the image
