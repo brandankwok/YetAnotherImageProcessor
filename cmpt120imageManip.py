@@ -2,7 +2,7 @@
 # Authors: Brandan Kwok 301462230, Kyle Deliyannides 301459316
 # Section: D300
 # Date: December 6th, 2021
-# Description: Module which contains all manipulation options for the image processor.
+# Description: Module which contains all manipulation functions for the image processor.
 
 import cmpt120imageProjHelper
 import numpy
@@ -302,7 +302,7 @@ def isYellow(pixel):
     v = hsv[2]
     # returns 'True' if hsv values are in range that is close to yellow
     # returns 'False' otherwise
-    if ( (h>=45 and h<=65) and (s>=45 and s<=100) and (v>=60 and v<=100)):
+    if ( (h>=45 and h<=65) and (s>=55 and s<=100) and (v>=60 and v<=100)):
         return True
     return False
 
