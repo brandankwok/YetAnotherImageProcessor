@@ -81,24 +81,32 @@ def handleUserInput(state, img):
     # handle the system functionalities
     if userInput.isalpha(): # check if the input is an alphabet
         print("Log: Doing system functionalities " + userInput)
-        if userInput == "Q": # this case actually won't happen, it's here as an example
-            print("Log: Quitting...")
 
-        elif userInput == "O":
+        # Open image
+        if userInput == "O":
             tkinter.Tk().withdraw()
             openFilename = tkinter.filedialog.askopenfilename()
             img = cmpt120imageProjHelper.getImage(openFilename)
             cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(appStateValues))
             state["lastOpenFilename"] = openFilename
+
+        # Save image
         elif userInput == "S":
             tkinter.Tk().withdraw()
             saveFilename = tkinter.filedialog.asksaveasfilename()
             cmpt120imageProjHelper.saveImage(img, saveFilename)
             cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(appStateValues))
             state["lastSaveFilename"] = saveFilename
+
+        # Reload original image
         elif userInput == "R":
-            img = cmpt120imageProjHelper.getImage(appStateValues["lastOpenFilename"])
-            cmpt120imageProjHelper.showInterface(img, appStateValues["lastOpenFilename"], generateMenu(appStateValues))
+            # Checks to see if any image has been loaded before, if none has it will reset image to black
+            if state["lastOpenFilename"] == "":
+                img = cmpt120imageProjHelper.getBlackImage(300, 200)
+            # If an image has been loaded before, resets image to lastOpenFilename taken from dictionary
+            else:
+                img = cmpt120imageProjHelper.getImage(state["lastOpenFilename"])
+                cmpt120imageProjHelper.showInterface(img, state["lastOpenFilename"], generateMenu(appStateValues))
 
     # or handle the manipulation functionalities based on which mode the application is in
     elif userInput.isdigit(): # has to be a digit for manipulation options
