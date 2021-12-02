@@ -3,6 +3,8 @@
 # Section: D300
 # Date: December 6th, 2021
 # Description: Driver file for the image processor.
+# Project was created and tested on PyCharm
+
 
 import cmpt120imageProjHelper
 import cmpt120imageManip
