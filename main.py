@@ -85,16 +85,26 @@ def handleUserInput(state, img):
         if userInput == "O":
             tkinter.Tk().withdraw()
             openFilename = tkinter.filedialog.askopenfilename()
-            img = cmpt120imageProjHelper.getImage(openFilename)
-            cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(appStateValues))
+            # prevents a crash by checking to see if 'cancel' is pressed
+            if openFilename != "":
+                img = cmpt120imageProjHelper.getImage(openFilename)
+                cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(appStateValues))
+                print("Log: Opening file: " + openFilename)
+            else:
+                print("Log: No file selected")
             state["lastOpenFilename"] = openFilename
 
         # Save image
         elif userInput == "S":
             tkinter.Tk().withdraw()
             saveFilename = tkinter.filedialog.asksaveasfilename()
-            cmpt120imageProjHelper.saveImage(img, saveFilename)
-            cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(appStateValues))
+            # prevents a crash by checking to see if 'cancel' is pressed
+            if saveFilename != "":
+                cmpt120imageProjHelper.saveImage(img, saveFilename)
+                cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(appStateValues))
+                print("Log: Saving file: " + saveFilename)
+            else:
+                print("Log: No save location selected")
             state["lastSaveFilename"] = saveFilename
 
         # Reload original image
@@ -103,6 +113,7 @@ def handleUserInput(state, img):
             if state["lastOpenFilename"] == "":
                 img = cmpt120imageProjHelper.getBlackImage(300, 200)
             # If an image has been loaded before, resets image to lastOpenFilename taken from dictionary
+            # This check is done to prevent a program crash
             else:
                 img = cmpt120imageProjHelper.getImage(state["lastOpenFilename"])
                 cmpt120imageProjHelper.showInterface(img, state["lastOpenFilename"], generateMenu(appStateValues))
