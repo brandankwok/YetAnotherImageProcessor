@@ -162,15 +162,29 @@ def sizeDouble(pixels):
   return newpixels
 
 def locateFish(pixels):
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+    Output: Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
+    """
+
+    """"
+    Initializes variables to the most extreme values they can be
+    this essentially assumes that the top of the fish is the very bottom of the image,
+    the bottom of the fish is the very top of the image, left is the very right, and right is the very left.
+    """
     top = len(pixels)
     bottom = 0
     left = len(pixels[0])
     right = 0
 
+    # Iterates through every pixel in the image
     for i in range(len(pixels)):
         for j in range(len(pixels[0])):
+            # Checks if the pixel at [i][j] is yellow in colour
             pixel = pixels[i][j]
             if isYellow(pixel):
+                # If pixel is yellow, check to see if these pixels are the top, bottom, left, or right of fish
+                # If it is, set respective variables to the indexes of the top, bottom, left, or right
                 if top > i:
                     top = i
                 if  bottom < i:
@@ -179,33 +193,54 @@ def locateFish(pixels):
                     left = j
                 if right < j:
                     right = j
-
+    # Calls drawBox function, passing it the image and the indexes of all four lines to be drawn
+    # Stores result as pixels - replacing original image
     pixels = drawBox(pixels, top, bottom, left, right)
+    # Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
     return pixels
 
 def isYellow(pixel):
-
+    """
+    Input:  pixel - list of RGB values
+    Output: Returns 'True' or 'False' depending on whether pixel closely resembles yellow
+    """
+    # Splits list 'pixel' into separate rgb variables
     r = pixel[0]
     g = pixel[1]
     b = pixel[2]
+    # Converts pixels rgb values to hsv and stores as tuple 'hsv'
     hsv = cmpt120imageProjHelper.rgb_to_hsv(r, g, b)
+    # Splits tuple 'hsv' into separate hsv variables
     h = hsv[0]
     s = hsv[1]
     v = hsv[2]
-
+    # returns 'True' if hsv values are in range that is close to yellow
+    # returns 'False' otherwise
     if ( (h>=45 and h<=65) and (s>=45 and s<=100) and (v>=60 and v<=100)):
         return True
     return False
 
 def drawBox(pixels, top, bottom, left, right):
-
+    """
+    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
+            top - integer representing the row of the top line to be drawn
+            bottom - integer representing the row of the bottom line to be drawn
+            left - integer representing the column of the left line to be drawn
+            right - integer representing the column of the right line to be drawn
+    Output: Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
+    """
+    # horizontalLength is the length of the two horizontal lines to be drawn
     horizontalLength = abs(left-right)
+    # verticalLength is the length of the two vertical lines to be drawn
     verticalLength = abs(top-bottom)
 
+    # Draws both horizontal lines
     for i in range(left, left+horizontalLength):
         pixels[top][i] = [0, 255, 0]
         pixels[bottom][i] = [0, 255, 0]
+    # Draws both vertical lines
     for i in range(top, top+verticalLength):
         pixels[i][left] = [0, 255, 0]
         pixels[i][right] = [0, 255, 0]
+    # Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
     return pixels
