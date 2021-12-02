@@ -90,9 +90,10 @@ def handleUserInput(state, img):
                 img = cmpt120imageProjHelper.getImage(openFilename)
                 cmpt120imageProjHelper.showInterface(img, openFilename, generateMenu(state))
                 print("Log: Opening file: " + openFilename)
+                state["lastOpenFilename"] = openFilename
             else:
                 print("Log: No file selected")
-            state["lastOpenFilename"] = openFilename
+
 
         # Save image
         elif userInput == "S":
@@ -103,9 +104,10 @@ def handleUserInput(state, img):
                 cmpt120imageProjHelper.saveImage(img, saveFilename)
                 cmpt120imageProjHelper.showInterface(img, saveFilename, generateMenu(state))
                 print("Log: Saving file: " + saveFilename)
+                state["lastSaveFilename"] = saveFilename
             else:
                 print("Log: No save location selected")
-            state["lastSaveFilename"] = saveFilename
+
 
         # Reload original image
         elif userInput == "R":
