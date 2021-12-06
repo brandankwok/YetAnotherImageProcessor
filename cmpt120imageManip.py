@@ -54,7 +54,8 @@ def applyBlue(pixels):
 def applySepia(pixels):
     """
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
-    Output: Returns a warm brownish tone by calculating a weighted average of the original R/G/B values for each pixel
+    Output: Returns a warm brownish tone
+            by calculating a weighted average of the original R/G/B values for each pixel
     """
     # Iterate through each pixel in the rows and columns
     for i in range(len(pixels)):
@@ -64,7 +65,7 @@ def applySepia(pixels):
             red = pixel[0]
             green = pixel[1]
             blue = pixel[2]
-            # Use the Sepia formula to calculate new RGB values using the min function and assign the corresponding RGB values back to the pixel
+            # Calculate new RGB values and assign back to the pixel
             pixel[0] = int(min(((red * .393) + (green * .769) + (blue * .189)), 255))
             pixel[1] = int(min(((red * .349) + (green * .686) + (blue * .168)), 255))
             pixel[2] = int(min(((red * .272) + (green * .534) + (blue * .131)), 255))
@@ -73,7 +74,8 @@ def applySepia(pixels):
 def applyWarm(pixels):
     """
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
-    Output: Returns a warm tone by scaling the original Red value up and the Blue value down using formulas
+    Output: Returns a warm tone
+            by scaling the original Red value up and the Blue value down using formulas
     """
     # Iterate through each pixel in the rows and columns
     for i in range(len(pixels)):
@@ -104,7 +106,8 @@ def applyWarm(pixels):
 def applyCold(pixels):
     """
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
-    Output: Returns a cold tone by scaling the original Red value down and the Blue value up using formulas
+    Output: Returns a cold tone
+            by scaling the original Red value down and the Blue value up using formulas
     """
     # Iterate through each pixel in the rows and columns
     for i in range(len(pixels)):
@@ -167,7 +170,8 @@ def rotateRight(pixels):
 def sizeDouble(pixels):
     """
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
-    Output: Returns a new image with width equal to 2*the original’s width and height equal to 2* the original’s height
+    Output: Returns a new image
+            with width equal to 2*the original’s width and height equal to 2* the original’s height
     """
     # Set the original height and width for the image
     origheight = len(pixels)
@@ -226,7 +230,7 @@ def locateFish(pixels):
     """"
     Initializes variables to the most extreme values they can be
     this essentially assumes that the top of the fish is the very bottom of the image,
-    the bottom of the fish is the very top of the image, left is the very right, and right is the very left.
+    the bottom of the fish is the very top, left is the very right, and right is the very left.
     """
     top = len(pixels)-1
     bottom = 0
