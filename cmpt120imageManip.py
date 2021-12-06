@@ -201,14 +201,17 @@ def sizeHalf(pixels):
         # Iterates through each pixel in 'newPixels'
         for i in range(len(newPixels)):
            for j in range(len(newPixels[0])):
-               # Assigns newPixel[i][j] to the average RGB values of the four adjacent pixels from the original image
-               # Variables pixelA-pixelD are the four adjacent pixels which in calculation of the average RGB values
+               # Assigns the average RGB values of the four adjacent pixels from the original image
+               # Variables pixelA-pixelD are the four adjacent pixels which in calculation of the average
                pixelA = pixels[i * 2][j * 2]
                pixelB = pixels[i * 2 + 1][j * 2]
                pixelC = pixels[i * 2][j * 2 + 1]
                pixelD = pixels[i * 2 + 1][j * 2 + 1]
-               average = [(pixelA[0]+pixelB[0]+pixelC[0]+pixelD[0])//4, (pixelA[1]+pixelB[1]+pixelC[1]+pixelD[1])//4, (pixelA[2]+pixelB[2]+pixelC[2]+pixelD[2])//4]
-               newPixels[i][j] = average
+               averageR = (pixelA[0]+pixelB[0]+pixelC[0]+pixelD[0])//4
+               averageG = (pixelA[1]+pixelB[1]+pixelC[1]+pixelD[1])//4
+               averageB = (pixelA[2]+pixelB[2]+pixelC[2]+pixelD[2])//4
+               newPixels[i][j] = [averageR, averageG, averageB]
+
         return newPixels
     else:
         print("Log: Image too small.")
