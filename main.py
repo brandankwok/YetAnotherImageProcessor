@@ -1,4 +1,4 @@
-# CMPT 120 Yet Another Image Processer
+# CMPT 120 - Yet Another Image Processer
 # Authors: Brandan Kwok 301462230, Kyle Deliyannides 301459316
 # Section: D300
 # Date: December 6th, 2021
