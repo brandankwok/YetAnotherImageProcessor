@@ -261,19 +261,20 @@ def locateFish(pixels):
         print("Log: No yellow detected in image.")
         return pixels
 
-    # horizontalLength is the length of the two horizontal lines to be drawn
-    horizontalLength = abs(left - right)
-    # verticalLength is the length of the two vertical lines to be drawn
-    verticalLength = abs(top - bottom)
-
-    # Draws both horizontal lines
-    for i in range(left, left + horizontalLength):
-        pixels[top][i] = [0, 255, 0]
-        pixels[bottom][i] = [0, 255, 0]
+    # vertical is the length of the two vertical lines to be drawn
+    vertical = bottom-top
     # Draws both vertical lines
-    for i in range(top, top + verticalLength):
+    for i in range(top, top + vertical):
         pixels[i][left] = [0, 255, 0]
         pixels[i][right] = [0, 255, 0]
+
+    # horizontal is the length of the two horizontal lines to be drawn
+    horizontal = right-left
+    # Draws both horizontal lines
+    for i in range(left, left + horizontal):
+        pixels[top][i] = [0, 255, 0]
+        pixels[bottom][i] = [0, 255, 0]
+
     # Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
     return pixels
 
