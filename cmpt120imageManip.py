@@ -14,13 +14,10 @@ def applyRed(pixels):
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
     Output: Returns only the red values and sets Green and Blue values to zero in each pixel of the image
     """
-    # Set the height and width for the image
-    height = len(pixels)
-    width = len(pixels[0])
     # Iterate through each pixel in the rows and columns
-    for row in range(height):
-        for col in range(width):
-            pixel = pixels[row][col]
+    for i in range(len(pixels)):
+        for j in range(len(pixels[0])):
+            pixel = pixels[i][j]
             # Set the Green and Blue values to zero
             pixel[1] = 0
             pixel[2] = 0
@@ -31,13 +28,10 @@ def applyGreen(pixels):
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
     Output: Returns only the Green values and sets Red and Blue values to zero in each pixel of the image
     """
-    # Set the height and width for the image
-    height = len(pixels)
-    width = len(pixels[0])
     # Iterate through each pixel in the rows and columns
-    for row in range(height):
-        for col in range(width):
-            pixel = pixels[row][col]
+    for i in range(len(pixels)):
+        for j in range(len(pixels[0])):
+            pixel = pixels[i][j]
             # Set the Red and Blue values to zero
             pixel[0] = 0
             pixel[2] = 0
@@ -48,13 +42,10 @@ def applyBlue(pixels):
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
     Output: Returns only the Blue values and sets Red and Blue values to zero in each pixel of the image
     """
-    # Set the height and width for the image
-    height = len(pixels)
-    width = len(pixels[0])
     # Iterate through each pixel in the rows and columns
-    for row in range(height):
-        for col in range(width):
-            pixel = pixels[row][col]
+    for i in range(len(pixels)):
+        for j in range(len(pixels[0])):
+            pixel = pixels[i][j]
             # Set the Red and Green values to zero
             pixel[0] = 0
             pixel[1] = 0
@@ -65,25 +56,18 @@ def applySepia(pixels):
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
     Output: Returns a warm brownish tone by calculating a weighted average of the original R/G/B values for each pixel
     """
-    # Set the height and width for the image
-    height = len(pixels)
-    width = len(pixels[0])
     # Iterate through each pixel in the rows and columns
-    for row in range(height):
-        for col in range(width):
-            pixel = pixels[row][col]
-            # Assign the RGB values
-            Red = pixel[0]
-            Green = pixel[1]
-            Blue = pixel[2]
-            # Use the Sepia formula to calculate new RGB values using the min function
-            SepiaRed = min(((Red * .393) + (Green * .769) + (Blue * .189)), 255)
-            SepiaGreen = min(((Red * .349) + (Green * .686) + (Blue * .168)), 255)
-            SepiaBlue = min(((Red * .272) + (Green * .534) + (Blue * .131)), 255)
-            # Assign the new RBG values to the original RGB values
-            pixel[0] = int(SepiaRed)
-            pixel[1] = int(SepiaGreen)
-            pixel[2] = int(SepiaBlue)
+    for i in range(len(pixels)):
+        for j in range(len(pixels[0])):
+            pixel = pixels[i][j]
+            # Split the RGB values
+            red = pixel[0]
+            green = pixel[1]
+            blue = pixel[2]
+            # Use the Sepia formula to calculate new RGB values using the min function and assign the corresponding RGB values back to the pixel
+            pixel[0] = int(min(((red * .393) + (green * .769) + (blue * .189)), 255))
+            pixel[1] = int(min(((red * .349) + (green * .686) + (blue * .168)), 255))
+            pixel[2] = int(min(((red * .272) + (green * .534) + (blue * .131)), 255))
     return pixels
 
 def applyWarm(pixels):
@@ -91,13 +75,10 @@ def applyWarm(pixels):
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
     Output: Returns a warm tone by scaling the original Red value up and the Blue value down using formulas
     """
-    # Set the height and width for the image
-    height = len(pixels)
-    width = len(pixels[0])
     # Iterate through each pixel in the rows and columns
-    for row in range(height):
-        for col in range(width):
-            pixel = pixels[row][col]
+    for i in range(len(pixels)):
+        for j in range(len(pixels[0])):
+            pixel = pixels[i][j]
             # Assign the Red and Blue values
             Red = pixel[0]
             Blue = pixel[2]
@@ -125,13 +106,10 @@ def applyCold(pixels):
     Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
     Output: Returns a cold tone by scaling the original Red value down and the Blue value up using formulas
     """
-    # Set the height and width for the image
-    height = len(pixels)
-    width = len(pixels[0])
     # Iterate through each pixel in the rows and columns
-    for row in range(height):
-        for col in range(width):
-            pixel = pixels[row][col]
+    for i in range(len(pixels)):
+        for j in range(len(pixels[0])):
+            pixel = pixels[i][j]
             # Assign the Red and Blue values
             Red = pixel[0]
             Blue = pixel[2]
@@ -223,30 +201,18 @@ def sizeHalf(pixels):
         # Iterates through each pixel in 'newPixels'
         for i in range(len(newPixels)):
            for j in range(len(newPixels[0])):
-               # Assigns newPixel[i][j] to the average of the four adjacent pixels
-                newPixels[i][j] = average(pixels, i, j)
+               # Assigns newPixel[i][j] to the average RGB values of the four adjacent pixels from the original image
+               # Variables pixelA-pixelD are the four adjacent pixels which in calculation of the average RGB values
+               pixelA = pixels[i * 2][j * 2]
+               pixelB = pixels[i * 2 + 1][j * 2]
+               pixelC = pixels[i * 2][j * 2 + 1]
+               pixelD = pixels[i * 2 + 1][j * 2 + 1]
+               average = [(pixelA[0]+pixelB[0]+pixelC[0]+pixelD[0])//4, (pixelA[1]+pixelB[1]+pixelC[1]+pixelD[1])//4, (pixelA[2]+pixelB[2]+pixelC[2]+pixelD[2])//4]
+               newPixels[i][j] = average
         return newPixels
     else:
-        print("Log: Error. Image too small to half the size.")
+        print("Log: Image too small.")
         return pixels
-
-def average(pixels, i, j):
-    """
-    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
-            i - index of row (integer)
-            j - index of column (integer)
-    Output: Returns a list of RGB values for one pixel
-            This pixel is calculated from four adjacent pixels in 'pixels' based off the indexes i and j
-    """
-    # variables a, b, c, and d are one pixel each.
-    # each pixel is adjacent to one another, based off the indexes i and j
-    a = pixels[i*2][j*2]
-    b = pixels[i*2+1][j*2]
-    c = pixels[i*2][j*2+1]
-    d = pixels[i*2+1][j*2+1]
-    # calculates the average RGB values of all four adjacent pixels and stores it in a list 'pixel'
-    pixel = [(a[0]+b[0]+c[0]+d[0])//4, (a[1]+b[1]+c[1]+d[1])//4, (a[2]+b[2]+c[2]+d[2])//4]
-    return pixel
 
 def locateFish(pixels):
     """
@@ -263,26 +229,44 @@ def locateFish(pixels):
     bottom = 0
     left = len(pixels[0])-1
     right = 0
-
+    foundYellow = False
     # Iterates through every pixel in the image
     for i in range(len(pixels)):
         for j in range(len(pixels[0])):
             # Checks if the pixel at [i][j] is yellow in colour
             pixel = pixels[i][j]
             if isYellow(pixel):
+                foundYellow = True
                 # If pixel is yellow, check to see if these pixels are the top, bottom, left, or right of fish
                 # If it is, set respective variables to the indexes of the top, bottom, left, or right
                 if top > i:
                     top = i
-                if  bottom < i:
+                if bottom < i:
                     bottom = i
                 if left > j:
                     left = j
                 if right < j:
                     right = j
-    # Calls drawBox function, passing it the image and the indexes of all four lines to be drawn
-    # Stores result as pixels - replacing original image
-    pixels = drawBox(pixels, top, bottom, left, right)
+
+    # If no yellow is found in image, terminate function early
+    # This check is done to prevent a crash that occurs if no yellow is found
+    if not foundYellow:
+        print("Log: No yellow detected in image.")
+        return pixels
+
+    # horizontalLength is the length of the two horizontal lines to be drawn
+    horizontalLength = abs(left - right)
+    # verticalLength is the length of the two vertical lines to be drawn
+    verticalLength = abs(top - bottom)
+
+    # Draws both horizontal lines
+    for i in range(left, left + horizontalLength):
+        pixels[top][i] = [0, 255, 0]
+        pixels[bottom][i] = [0, 255, 0]
+    # Draws both vertical lines
+    for i in range(top, top + verticalLength):
+        pixels[i][left] = [0, 255, 0]
+        pixels[i][right] = [0, 255, 0]
     # Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
     return pixels
 
@@ -291,43 +275,9 @@ def isYellow(pixel):
     Input:  pixel - list of RGB values
     Output: Returns 'True' or 'False' depending on whether pixel closely resembles yellow
     """
-    # Splits list 'pixel' into separate rgb variables
-    r = pixel[0]
-    g = pixel[1]
-    b = pixel[2]
     # Converts pixels rgb values to hsv and stores as tuple 'hsv'
-    hsv = cmpt120imageProjHelper.rgb_to_hsv(r, g, b)
-    # Splits tuple 'hsv' into separate hsv variables
-    h = hsv[0]
-    s = hsv[1]
-    v = hsv[2]
+    hsv = cmpt120imageProjHelper.rgb_to_hsv(pixel[0], pixel[1], pixel[2])
     # returns 'True' if hsv values are in range that is close to yellow
+    # (this range is just arbitrary values I came up with)
     # returns 'False' otherwise
-    if ( (h>=45 and h<=65) and (s>=45 and s<=100) and (v>=60 and v<=100)):
-        return True
-    return False
-
-def drawBox(pixels, top, bottom, left, right):
-    """
-    Input:  pixels - 3d list of lists of RGB values (a height-by-width-by-3 list)
-            top - integer representing the row of the top line to be drawn
-            bottom - integer representing the row of the bottom line to be drawn
-            left - integer representing the column of the left line to be drawn
-            right - integer representing the column of the right line to be drawn
-    Output: Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
-    """
-    # horizontalLength is the length of the two horizontal lines to be drawn
-    horizontalLength = abs(left-right)
-    # verticalLength is the length of the two vertical lines to be drawn
-    verticalLength = abs(top-bottom)
-
-    # Draws both horizontal lines
-    for i in range(left, left+horizontalLength):
-        pixels[top][i] = [0, 255, 0]
-        pixels[bottom][i] = [0, 255, 0]
-    # Draws both vertical lines
-    for i in range(top, top+verticalLength):
-        pixels[i][left] = [0, 255, 0]
-        pixels[i][right] = [0, 255, 0]
-    # Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
-    return pixels
+    return int(hsv[0]) in range(50, 60) and int(hsv[1]) in range(50, 100) and int(hsv[2]) in range(70, 100)
