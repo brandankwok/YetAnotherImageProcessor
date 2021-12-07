@@ -240,9 +240,12 @@ def locateFish(pixels):
     # Iterates through every pixel in the image
     for i in range(len(pixels)):
         for j in range(len(pixels[0])):
-            # Checks if the pixel at [i][j] is yellow in colour
             pixel = pixels[i][j]
-            if isYellow(pixel):
+            # Converts pixels rgb values to hsv and stores as tuple 'hsv'
+            hsv = cmpt120imageProjHelper.rgb_to_hsv(pixel[0], pixel[1], pixel[2])
+            # Checks if the pixel at [i][j] has hsv values are in range that is close to yellow
+            # (this range is just arbitrary values I came up with)
+            if int(hsv[0]) in range(50, 60) and int(hsv[1]) in range(50, 100) and int(hsv[2]) in range(70, 100):
                 foundYellow = True
                 # If pixel is yellow, check to see if these pixels are the top, bottom, left, or right of fish
                 # If it is, set respective variables to the indexes of the top, bottom, left, or right
@@ -277,15 +280,3 @@ def locateFish(pixels):
 
     # Returns altered pixels - with a green (0, 255, 0) box drawn around the fish
     return pixels
-
-def isYellow(pixel):
-    """
-    Input:  pixel - list of RGB values
-    Output: Returns 'True' or 'False' depending on whether pixel closely resembles yellow
-    """
-    # Converts pixels rgb values to hsv and stores as tuple 'hsv'
-    hsv = cmpt120imageProjHelper.rgb_to_hsv(pixel[0], pixel[1], pixel[2])
-    # returns 'True' if hsv values are in range that is close to yellow
-    # (this range is just arbitrary values I came up with)
-    # returns 'False' otherwise
-    return int(hsv[0]) in range(50, 60) and int(hsv[1]) in range(50, 100) and int(hsv[2]) in range(70, 100)
